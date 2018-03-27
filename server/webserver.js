@@ -30,5 +30,5 @@ require('./routes/index.js')(app, path);
 require('./nodemailer/mail.js')(app, path);
 
 app.listen(PORT, ()=>{
-    console.log('the system is down on port', PORT)
+    console.log('the system is running on: ', PORT)
 });

@@ -2,7 +2,6 @@ import axios from "axios";
 import { browserHistory } from 'react-router';
 import types from './types';
 
-
 export function getPlanner(zip){
     return async dispatch => {
         try {
@@ -12,7 +11,10 @@ export function getPlanner(zip){
                 payload: request
             })
         } catch (err) {
-            console.log(err)
+            dispatch({
+                type: types.ZIP_ERR,
+                payload: err.response.data
+            })
         }
     }
 }

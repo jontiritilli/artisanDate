@@ -4,6 +4,7 @@ export default {
     EVENT_ERROR: "event_error",
     GET_DINNER: "get_dinner",
     SEND_ZIP: "send_zip",
+    ZIP_ERR: "zip_err",
     ZIP_SENDING: "zip_sending",
     GET_DETAILS: "get_details",
     CLEAR_DETAILS: "clear_details",

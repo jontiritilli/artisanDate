@@ -174,9 +174,18 @@ module.exports = (app,  path) => {
             if(output.events.length > 0 && output.food.length > 0 && output.drinks.length > 0){
                 res.send(output);
             }
-            res.status(400).send({message: 'error getting results, zip code may be invalid'})
+            res.status(400).send(
+                {
+                    message: 'We cannot find any locations with this zip code. Please try again.'
+                }
+            )
         }).catch(err =>
-            res.status(400).send(err)
+            res.status(500).send(
+                {
+                    message: 'There were errors on the server',
+                    error: err
+                }
+            )
         );
     });
     //google places call for food
