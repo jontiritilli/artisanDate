@@ -51,7 +51,7 @@ export class MapComponent extends React.PureComponent {
                 <MarkerWithLabel
                     position={{ lat: eventLoc.lat, lng: eventLoc.long }}
                     icon={EventMarker}
-                    labelAnchor={new google.maps.Point(0, 0)}
+                    labelAnchor={new google.maps.Point(0, 90)}
                     labelStyle={labelBg}
                 >
                     <div className="route-container">
@@ -79,7 +79,7 @@ export class MapComponent extends React.PureComponent {
                 <MarkerWithLabel
                     position={{ lat: drinkLoc.lat, lng: drinkLoc.long }}
                     icon={DrinkMarker}
-                    labelAnchor={new google.maps.Point(0, 0)}
+                    labelAnchor={new google.maps.Point(150, 0)}
                     labelStyle={labelBg}
                 >
                     <div className="route-container">
