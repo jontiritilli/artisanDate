@@ -28,8 +28,53 @@ class Info extends Component{
             return <p className = 'pSize'>CURRENTLY OPEN</p>
         }
     }
+
+    convertTime(time){
+        let standardTime = '';
+        let newTime = time.substring(11, time.length);
+        const timeParst = parseInt(newTime);
+        if (timeParst > 12) {
+            let newHour = timeParst - 12;
+            let minutes = time.substring(13, time.length);
+              standardTime = `Event Begins at ${newHour}${minutes} PM`;
+        }else{
+            standardTime = `Event Begins at ${timeParst}${minutes} AM`;
+        }
+
+        return (
+            <span className = 'dollarSign amber-text'>{standardTime}</span>
+        );
+    }
     render(){
-        const { rating, price, is_closed, display_phone } = this.props.business;
+        const { rating, price, is_closed, display_phone,description, attending_count, time_start } = this.props.business;
+
+
+        
+
+        
+
+        
+        if(this.props.business.business_id){
+            return (
+                <div>
+                    <div id="eventDescription">
+                        <div className='row valign-wrapper center-align'>
+                            <div className='col s12'>
+                                {description}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col s12 center-align" id="rating">
+                        <div className="col">
+                            <span>RSVP: {attending_count}</span>
+                        </div>
+                        <div className="col">
+                            {this.convertTime(time_start)}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
 
         return (
             <div>
