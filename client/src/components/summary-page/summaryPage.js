@@ -15,9 +15,9 @@ class Summary extends Component{
             displayModal: false,
         };
 
-        this.eventLoc = {lat: null, long: null, address: []};
-        this.foodLoc = {lat: null, long: null, address: []};
-        this.drinkLoc = {lat: null, long: null, address: []};
+        this.eventLoc = {lat: null, long: null, name: null, address: []};
+        this.foodLoc = {lat: null, long: null, name: null, address: []};
+        this.drinkLoc = {lat: null, long: null, name: null, address: []};
 
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -70,6 +70,8 @@ class Summary extends Component{
         return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km;
     }
 
+
+
     determineMapZoom() {
         let zoom = null;
         let distance = null;
@@ -117,6 +119,7 @@ class Summary extends Component{
     }
 
     render() {
+        console.log(this.props.event.name);
         if (Object.keys(this.props.event).length === 0 || Object.keys(this.props.food).length === 0 || Object.keys(this.props.drinks).length === 0) {
             return(
                 <div className="grey lighten-4"/>
@@ -128,6 +131,7 @@ class Summary extends Component{
         this.eventLoc.address = this.props.event.location.display_address;
         this.foodLoc.address = this.props.food.location.display_address;
         this.drinkLoc.address = this.props.drinks.location.display_address;
+
         return (
                 <div className="grey lighten-4">
                     <div className='row'>
@@ -141,6 +145,9 @@ class Summary extends Component{
                                 eventLoc={this.eventLoc}
                                 foodLoc={this.foodLoc}
                                 drinkLoc={this.drinkLoc}
+                                foodName = {this.props.food.name}
+                                drinkName={this.props.drinks.name}
+                                evtName = {this.props.event.name}
                                 initialLat={latitude}
                                 initialLong={longitude}
                                 mapZoom={initialZoom}
