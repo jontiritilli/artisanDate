@@ -20,10 +20,11 @@ export class MapComponent extends React.PureComponent {
             background: 'linear-gradient(#fff, #fafafa)',
             boxShadow: "2px 2px 10px 2px rgba(0, 0, 0, 0.5)",
             borderRadius: "3px",
-            fontSize: "12px",
+            fontSize: "10px",
             padding: "0.5em",
             marginLeft: "0",
-            width: "150px"
+            width: "120px",
+            opacity: .8,
         };
         const { eventLoc, foodLoc, drinkLoc, initialLat, initialLong, mapZoom } = this.props;
         return compose(
@@ -51,11 +52,12 @@ export class MapComponent extends React.PureComponent {
                 <MarkerWithLabel
                     position={{ lat: eventLoc.lat, lng: eventLoc.long }}
                     icon={EventMarker}
-                    labelAnchor={new google.maps.Point(0, 0)}
+                    labelAnchor={new google.maps.Point(0,0)}
+                    zIndex = {1000}
                     labelStyle={labelBg}
                 >
                     <div className="route-container">
-                        {/* <p>{eventLoc.name}</p> */}
+                         <span>{this.props.evtName}</span>
                         {eventLoc.address.map((item,index) => {
                             return (<p key={index} className="address-line">{item}</p>);
                         })}
@@ -66,10 +68,11 @@ export class MapComponent extends React.PureComponent {
                     position={{ lat: foodLoc.lat, lng: foodLoc.long }}
                     icon={FoodMarker}
                     labelAnchor={new google.maps.Point(0, 0)}
+                    zIndex = {1001}
                     labelStyle={labelBg}
                 >
                     <div className="route-container">
-                        {/* <p>{foodLoc.name}</p> */}
+                         <span>{this.props.foodName}</span>
                         {foodLoc.address.map((item,index) => {
                             return (<p key={index} className="address-line">{item}</p>);
                         })}
@@ -79,11 +82,12 @@ export class MapComponent extends React.PureComponent {
                 <MarkerWithLabel
                     position={{ lat: drinkLoc.lat, lng: drinkLoc.long }}
                     icon={DrinkMarker}
-                    labelAnchor={new google.maps.Point(0, 0)}
+                    labelAnchor={new google.maps.Point(120, 0)}
                     labelStyle={labelBg}
+                    zIndex = {1002}
                 >
                     <div className="route-container">
-                        {/* <p>{drinkLoc.name}</p> */}
+                         <span>{this.props.drinkName}</span>
                         {drinkLoc.address.map((item,index) => {
                             return (<p key={index} className="address-line">{item}</p>);
                         })}
