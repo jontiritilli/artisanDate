@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import Modal from "../modal/modal"
-import { getPlanner, loadSpinner, giveNavPath, stopSpinner } from '../../actions';
+import { getPlanner, loadSpinner, giveNavPath } from '../../actions';
 
 class ZipPage extends Component {
     constructor (props){
@@ -127,4 +127,4 @@ ZipPage = reduxForm({
     validate: validate
 })(ZipPage);
 
-export default connect(mapStateToProps, { getPlanner, loadSpinner, giveNavPath, stopSpinner })(ZipPage);
+export default connect(mapStateToProps, { getPlanner, loadSpinner, giveNavPath })(ZipPage);

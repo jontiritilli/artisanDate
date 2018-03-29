@@ -112,10 +112,6 @@ export function clearIndividualDetails(){
     return {type: types.CLEAR_DETAILS}
 }
 
-export function stopSpinner(){
-    return {type: types.ZIP_ERR}
-}
-
 export function giveNavPath(path){
     return {
         type: types.GET_PATH,
