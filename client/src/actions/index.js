@@ -13,7 +13,7 @@ export function getPlanner(zip){
         } catch (err) {
             dispatch({
                 type: types.ZIP_ERR,
-                payload: err.response.data
+                payload: err.response
             })
         }
     }
@@ -109,9 +109,11 @@ export function locationDetails(props, name) {
 }
 
 export function clearIndividualDetails(){
-    return {
-        type: types.CLEAR_DETAILS
-    }
+    return {type: types.CLEAR_DETAILS}
+}
+
+export function stopSpinner(){
+    return {type: types.ZIP_ERR}
 }
 
 export function giveNavPath(path){
