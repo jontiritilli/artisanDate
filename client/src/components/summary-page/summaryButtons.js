@@ -19,7 +19,6 @@ class SummaryButtons extends Component {
     }
     
     sendItinerary(){
-        console.log("User data: ", this.props);
         if (!this.props.sent){
             this.props.loadSpinner(this.page);
             this.props.sendMail(this.data);
