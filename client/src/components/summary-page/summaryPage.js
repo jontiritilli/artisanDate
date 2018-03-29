@@ -34,6 +34,10 @@ class Summary extends Component{
                 const sessionDateResults = JSON.parse(sessionFinalPlan);
                 this.props.reloadFinalPlan(sessionDateResults);
             }
+        } else if(this.props.auth) {
+            this.props.history.push(`/location-page/`);
+        } else {
+            this.props.history.push(`/`);
         }
     }
 
