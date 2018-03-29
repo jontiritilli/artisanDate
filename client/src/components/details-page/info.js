@@ -60,7 +60,7 @@ class Info extends Component{
                     <div id="eventDescription">
                         <div className='row valign-wrapper center-align'>
                             <div className='col s12'>
-                                {description}
+                                <span className= 'description'>{description}</span>
                             </div>
                         </div>
                     </div>
