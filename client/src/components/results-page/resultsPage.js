@@ -4,13 +4,19 @@ import "./resultsPage.css"
 import { getPlanner, locationDetails, reloadPlanner, giveNavPath } from "../../actions";
 import { Link } from 'react-router-dom';
 import LocationBrowser from "./locationBrowser";
+import types from "../../actions/types";
 
 
 class ResultsPage extends Component {
     constructor(props){
         super(props);
 
-        this.url = "";
+        this.url = {
+            main: "",
+            event: "",
+            food: "",
+            drinks: ""
+        };
         this.initialUpdate = {
             events: false,
             food: false,
@@ -36,7 +42,7 @@ class ResultsPage extends Component {
                     reloadDrinks: JSON.parse(sessionDrinks)
                 }
             };
-            this.props.reloadPlanner(sessionDateResults)
+            this.props.reloadPlanner(sessionDateResults);
         } else {
             this.props.getPlanner(this.props.match.params).then(() => {
                 sessionStorage.setItem("eventsResults", JSON.stringify(this.props.events));
@@ -59,22 +65,35 @@ class ResultsPage extends Component {
         this.props.history.push(`/summary-page`);
     }
 
-    updateUrl(){
+    updateUrl(locationId, eventType){
         const {zip} = this.props.match.params;
-        setTimeout(function(){
-            console.log("Replacing URL: ", this.props);
+        this.changeUrl(locationId, eventType);
+        const event = this.url.event ? this.url.event : this.props.match.params.events;
+        const food = this.url.food ? this.url.food : this.props.match.params.food;
+        const drinks = this.url.drinks ? this.url.drinks : this.props.match.params.drinks;
+        this.url.main = `/results-page/${zip}/${event}/${food}/${drinks}`;
 
-            }, 1000);
-console.log("before the timeout: ", this.props.mainEvent.id);
-        this.url = `/results-page/${zip}/${this.props.mainEvent.id}/${this.props.mainFood.id}/${this.props.mainDrinks.id}`;
+        window.history.replaceState("", "", this.url.main);
+    }
 
-        window.history.replaceState("", "", this.url);
-
+    changeUrl(locationId, typeString){
+        switch (typeString){
+            case "Events":
+                this.url.event = locationId;
+                break;
+            case "Food":
+                this.url.food = locationId;
+                break;
+            case "Drinks":
+                this.url.drinks = locationId;
+                break;
+            default:
+                break;
+        }
     }
 
     render() {
         const { history } = this.props;
-        console.log("updated main", this.props);
 
         return (
             <div className="grey lighten-4">

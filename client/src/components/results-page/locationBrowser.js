@@ -11,13 +11,14 @@ class LocationBrowser extends Component {
     constructor(props){
         super(props);
 
+        this.carouselLoaded = false;
         this.index = 0;
         this.locationId = "";
         this.details = {};
         this.updateLocation = this.updateLocation.bind(this);
         this.goToDetails = this.goToDetails.bind(this);
     }
-  
+
     componentWillReceiveProps(nextProps){
         if(!this.props.initial.complete){
             this.updateLocation(0, nextProps.locations);
@@ -30,19 +31,17 @@ class LocationBrowser extends Component {
     }
 
     updateLocation(index, locations){
-        console.log(index);
         if(this.props.locations.length === 0){
             this.locationId = locations[index].id;
             this.props.locationDetails(locations[index], this.props.name);
             return;
         }
-
-        this.index = index;
-        this.locationId = this.props.locations[index].id;
-        console.log("changing location: ",this.locationId)
-        this.details = this.props.locations[index];
+        this.index = this.carouselLoaded ? index : this.index;
+        this.carouselLoaded = true;
+        this.locationId = this.props.locations[this.index].id;
+        this.details = this.props.locations[this.index];
         this.props.locationDetails(this.details, this.props.name);
-        this.props.updateUrl();
+        this.props.updateUrl(this.locationId, this.props.name);
     }
 
     goToDetails(){
@@ -82,7 +81,6 @@ class LocationBrowser extends Component {
                 </div>
             );
         }
-
         while (locName !== locations[this.index].id){
             this.index++;
         }

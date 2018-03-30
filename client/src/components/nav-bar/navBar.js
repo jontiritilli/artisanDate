@@ -68,6 +68,7 @@ class NavBar extends Component {
     }
 
     handleGoBack(){
+        console.log("nav go back", this.props);
         switch (this.props.path) {
             case "/details-page/:type/:id":
                 this.props.history.goBack();
