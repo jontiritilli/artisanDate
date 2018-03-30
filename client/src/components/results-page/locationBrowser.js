@@ -19,7 +19,6 @@ class LocationBrowser extends Component {
     }
   
     componentWillReceiveProps(nextProps){
-        // console.log("in location browser", this.props);
         if(!this.props.initial.complete){
             this.updateLocation(0, nextProps.locations);
             this.props.initial[nextProps.name] = true;
@@ -31,19 +30,19 @@ class LocationBrowser extends Component {
     }
 
     updateLocation(index, locations){
+        console.log(index);
         if(this.props.locations.length === 0){
             this.locationId = locations[index].id;
             this.props.locationDetails(locations[index], this.props.name);
             return;
         }
+
         this.index = index;
         this.locationId = this.props.locations[index].id;
+        console.log("changing location: ",this.locationId)
         this.details = this.props.locations[index];
         this.props.locationDetails(this.details, this.props.name);
-        console.log("updating", this.props);
-        if (this.props.mainDrinks !== undefined) {
-            this.props.updateUrl();
-        }
+        this.props.updateUrl();
     }
 
     goToDetails(){
@@ -56,10 +55,8 @@ class LocationBrowser extends Component {
         }
     }
 
-
     render() {
         const { locations, name, locName } = this.props;
-
 
         if(!locations.length){
             return (
@@ -85,10 +82,11 @@ class LocationBrowser extends Component {
                 </div>
             );
         }
-        console.log("Locations name: ", locName, "locations URL: ", locations[this.index].id);
+
         while (locName !== locations[this.index].id){
             this.index++;
         }
+
         const result = locations.map((item, index) => {
             const {image_url, name, location, display_phone, id} = item;
             return (
@@ -96,7 +94,6 @@ class LocationBrowser extends Component {
             )
         });
 
-// console.log("finished", this.index)
         return (
             <div className="row valign-wrapper">
                 <div className="col s12 content-list">
@@ -131,12 +128,5 @@ class LocationBrowser extends Component {
         );
     }
 }
-function mapStateToProps(state){
-    return {
-        mainEvent: state.datePlan.mainEvent,
-        mainFood: state.datePlan.mainFood,
-        mainDrinks: state.datePlan.mainDrinks
-    }
-}
 
-export default connect(mapStateToProps, {locationDetails})(LocationBrowser);
+export default connect(null, {locationDetails})(LocationBrowser);

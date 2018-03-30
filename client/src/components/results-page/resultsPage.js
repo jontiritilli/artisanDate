@@ -20,19 +20,8 @@ class ResultsPage extends Component {
 
         this.updateUrl = this.updateUrl.bind(this);
     }
-    // componentWillReceiveProps(prevProps, prevState, snapshot){
-    //     console.log("in Results page", this.props);
-    //     if (!this.initialUpdate.complete){
-    //         console.log("in Results page IF", this.props);
-    //     }
-    //     // console.log("in Results page", this.props);
-    //     // if(!this.url !== prevProps.match.url){
-    //     //     this.updateUrl();
-    //     // }
-    // }
 
     componentDidMount(){
-        // console.log(this.props);
         this.props.giveNavPath(this.props.match.path);
         const sessionLoaded = sessionStorage.getItem("loadedResults");
         if (JSON.parse(sessionLoaded)) {
@@ -47,9 +36,8 @@ class ResultsPage extends Component {
                     reloadDrinks: JSON.parse(sessionDrinks)
                 }
             };
-            this.props.reloadPlanner(sessionDateResults);
+            this.props.reloadPlanner(sessionDateResults)
         } else {
-            console.log("DID MOUNT", this,props.match.params)
             this.props.getPlanner(this.props.match.params).then(() => {
                 sessionStorage.setItem("eventsResults", JSON.stringify(this.props.events));
                 sessionStorage.setItem("foodResults", JSON.stringify(this.props.food));
@@ -72,21 +60,21 @@ class ResultsPage extends Component {
     }
 
     updateUrl(){
-        // console.log("this.props: ", this.props);
         const {zip} = this.props.match.params;
-        // debugger;
-        this.url = `/${zip}/${this.props.mainEvent.id}/${this.props.mainFood.id}/${this.props.mainDrinks.id}`;
-        console.log(this.url);
-        if (this.props.mainEvent.id && this.props.mainFood.id && this.props.mainDrinks.id){
-            window.history.replaceState("", "", this.url);
-        }
+        setTimeout(function(){
+            console.log("Replacing URL: ", this.props);
+
+            }, 1000);
+console.log("before the timeout: ", this.props.mainEvent.id);
+        this.url = `/results-page/${zip}/${this.props.mainEvent.id}/${this.props.mainFood.id}/${this.props.mainDrinks.id}`;
+
+        window.history.replaceState("", "", this.url);
 
     }
 
     render() {
-        console.log("results props url: ", this.props.match.url);
-        const { history,  } = this.props;
-
+        const { history } = this.props;
+        console.log("updated main", this.props);
 
         return (
             <div className="grey lighten-4">
