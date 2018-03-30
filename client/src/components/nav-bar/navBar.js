@@ -135,4 +135,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, { signOut, clearIndividualDetails })(NavBar);
+export default connect(mapStateToProps, { signOut, clearIndividualDetails})(NavBar);

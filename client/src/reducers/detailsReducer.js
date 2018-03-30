@@ -8,9 +8,9 @@ export default function (state = DEFAULT_STATE, action) {
     switch (action.type) {
         case types.GET_DETAILS:
             const { data } = action.payload;
-            return { ...state, data };
+            return { ...state, data : data };
         case types.CLEAR_DETAILS:
-            return {...state, data: DEFAULT_STATE.data};
+            return {...state, data: {}};
         default:
             return state;
     }

@@ -34,6 +34,10 @@ class Summary extends Component{
                 const sessionDateResults = JSON.parse(sessionFinalPlan);
                 this.props.reloadFinalPlan(sessionDateResults);
             }
+        } else if(this.props.auth) {
+            this.props.history.push(`/location-page/`);
+        } else {
+            this.props.history.push(`/`);
         }
     }
 
@@ -119,7 +123,6 @@ class Summary extends Component{
     }
 
     render() {
-        console.log(this.props.event.name);
         if (Object.keys(this.props.event).length === 0 || Object.keys(this.props.food).length === 0 || Object.keys(this.props.drinks).length === 0) {
             return(
                 <div className="grey lighten-4"/>
@@ -157,7 +160,7 @@ class Summary extends Component{
 
                     </div>
                         <SummaryButtons openModal={this.openModal}/>
-                        <Modal display={this.state.displayModal} closeModal={this.closeModal} />
+                        <Modal display={this.state.displayModal} closeModal={this.closeModal} type="confirm" message="Are You Sure You Want To Start Over?"/>
                 </div>
         );
     }
