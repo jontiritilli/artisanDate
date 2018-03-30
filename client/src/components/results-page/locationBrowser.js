@@ -11,6 +11,7 @@ class LocationBrowser extends Component {
     constructor(props){
         super(props);
 
+        this.index = 0;
         this.locationId = "";
         this.details = {};
         this.updateLocation = this.updateLocation.bind(this);
@@ -18,6 +19,7 @@ class LocationBrowser extends Component {
     }
   
     componentWillReceiveProps(nextProps){
+        // console.log("in location browser", this.props);
         if(!this.props.initial.complete){
             this.updateLocation(0, nextProps.locations);
             this.props.initial[nextProps.name] = true;
@@ -34,9 +36,14 @@ class LocationBrowser extends Component {
             this.props.locationDetails(locations[index], this.props.name);
             return;
         }
+        this.index = index;
         this.locationId = this.props.locations[index].id;
         this.details = this.props.locations[index];
         this.props.locationDetails(this.details, this.props.name);
+        console.log("updating", this.props);
+        if (this.props.mainDrinks !== undefined) {
+            this.props.updateUrl();
+        }
     }
 
     goToDetails(){
@@ -51,7 +58,8 @@ class LocationBrowser extends Component {
 
 
     render() {
-        const { locations, name } = this.props;
+        const { locations, name, locName } = this.props;
+
 
         if(!locations.length){
             return (
@@ -77,7 +85,10 @@ class LocationBrowser extends Component {
                 </div>
             );
         }
-
+        console.log("Locations name: ", locName, "locations URL: ", locations[this.index].id);
+        while (locName !== locations[this.index].id){
+            this.index++;
+        }
         const result = locations.map((item, index) => {
             const {image_url, name, location, display_phone, id} = item;
             return (
@@ -85,6 +96,7 @@ class LocationBrowser extends Component {
             )
         });
 
+// console.log("finished", this.index)
         return (
             <div className="row valign-wrapper">
                 <div className="col s12 content-list">
@@ -93,7 +105,14 @@ class LocationBrowser extends Component {
                             <div className="row">
                                 <div className="col s12">
                                     <span className="card-title my-8">{name}</span>
-                                    <Carousel showThumbs={false} showStatus={false} showArrows={true} infiniteLoop={true} showIndicators={false} swipeScrollTolerance={20} onChange={this.updateLocation}>
+                                    <Carousel showThumbs={false}
+                                              selectedItem={this.index}
+                                              showStatus={false}
+                                              showArrows={true}
+                                              infiniteLoop={true}
+                                              showIndicators={false}
+                                              swipeScrollTolerance={20}
+                                              onChange={this.updateLocation}>
                                         {result}
                                     </Carousel>
                                 </div>
@@ -112,5 +131,12 @@ class LocationBrowser extends Component {
         );
     }
 }
+function mapStateToProps(state){
+    return {
+        mainEvent: state.datePlan.mainEvent,
+        mainFood: state.datePlan.mainFood,
+        mainDrinks: state.datePlan.mainDrinks
+    }
+}
 
-export default connect(null, {locationDetails})(LocationBrowser);
+export default connect(mapStateToProps, {locationDetails})(LocationBrowser);
