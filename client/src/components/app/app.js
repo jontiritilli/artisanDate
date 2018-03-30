@@ -23,7 +23,7 @@ const App = () => (
             <Route path = '/signup-page' component = {SignUp}/>
             <Route path = '/signin-page' component = {SignIn}/>
             <Route path = '/location-page' component = {ZipPage}/>
-            <Route path = '/results-page/:zip' component = {auth(ResultsPage)}/>
+            <Route path = '/results-page/:zip/:events/:food/:drinks' component = {auth(ResultsPage)}/>
             {/*<Route path = '/results-page/:zip/:id' component = {ResultsPage}/>*/}
             <Route path = '/details-page/:type/:id' component = {auth(DetailsPage)}/>
             <Route path = '/summary-page' component = {auth(SummaryPage)}/>

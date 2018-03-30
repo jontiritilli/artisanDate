@@ -9,6 +9,7 @@ import Info from './info';
 class DetailsPage extends Component{
 
     componentDidMount(){
+        console.log("Details did mount:", this.props.details);
         this.props.getIndividual(this.props.match.params);
         this.props.giveNavPath(this.props.match.path);
     }
