@@ -1,39 +1,3 @@
 /******* info.css *******/
-#jumboImg{
-    margin: 2vh;
-}
-.multi{
-        height: 40vh;
-        margin: 3vh auto;
-    }
-#rating .container{
-    margin-top: 5vh;
-}
-.roboto{
-    font-family: 'Roboto', sans-serif;
-}
-#description p{
-    font-size: 2rem;
-}
-.justify{
-    text-align: justify;
-}
-.dollarSign{
-    font-size: 3em;
-}
 
-.pSize{
-    font-size: 2em; 
-}
-
-.description{
-    font-size: 3rem;
-    text-align: justify;
-}
-
-@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px)and (-webkit-min-device-pixel-ratio: 2) {
-    .responsive-img {
-        height: 25vh !important;
-    }
-}
 

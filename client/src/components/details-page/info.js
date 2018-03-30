@@ -42,33 +42,25 @@ class Info extends Component{
         }
 
         return (
-            <span className = 'dollarSign amber-text'>{standardTime}</span>
+            <span>{standardTime}</span>
         );
     }
     render(){
         const { rating, price, is_closed, display_phone,description, attending_count, time_start } = this.props.business;
-
-
-        
-
-        
-
-        
+        console.log('props in details page:', this.props);
+        const newFormat = new Date(time_start);
+        console.log(newFormat);
         if(this.props.business.business_id){
             return (
                 <div>
-                    <div id="eventDescription">
-                        <div className='row valign-wrapper center-align'>
-                            <div className='col s12'>
-                                <span className= 'description'>{description}</span>
-                            </div>
+                    <div className = 'description'>
+                        <div className = 'description__text-box'>
+                            <span className = 'description__text'>{description}</span>
                         </div>
-                    </div>
-                    <div className="col s12 center-align" id="rating">
-                        <div className="col">
-                            <span>RSVP: {attending_count}</span>
+                        <div className = 'attendee-box'>
+                            <span>rsvp count: {attending_count}</span>
                         </div>
-                        <div className="col">
+                        <div>
                             {this.convertTime(time_start)}
                         </div>
                     </div>
