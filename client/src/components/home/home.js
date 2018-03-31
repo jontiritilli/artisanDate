@@ -1,13 +1,19 @@
 import React, {Component} from 'react';
 import './home.css';
 import { Link } from "react-router-dom";
+import {connect} from "react-redux";
 
-
-export default class Home extends Component {
+class Home extends Component {
     constructor(props){
         super(props);
         this.state = {
 
+        }
+    }
+
+    componentDidMount(){
+        if(this.props.auth) {
+            this.props.history.push(`/location-page/`);
         }
     }
 
@@ -26,3 +32,12 @@ export default class Home extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        auth: state.user.auth,
+        email: state.user.email,
+    }
+}
+
+export default connect(mapStateToProps)(Home);
