@@ -32,7 +32,7 @@ class ZipPage extends Component {
                     sessionStorage.setItem("foodResults", JSON.stringify(this.props.food));
                     sessionStorage.setItem("drinksResults", JSON.stringify(this.props.drinks));
                     sessionStorage.setItem("loadedResults", JSON.stringify(this.props.dataLoaded));
-                    this.props.history.push(`/results-page/${props.zip}`);
+                    this.props.history.push(`/results-page/${props.zip}/${this.props.events[0].id}/${this.props.food[0].id}/${this.props.drinks[0].id}`);
                 } else {
                     this.openModal();
                 }
