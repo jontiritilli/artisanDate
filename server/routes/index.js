@@ -245,15 +245,20 @@ module.exports = (app,  path) => {
             id.splice(position, 1, 'u');
             id = id.join('');
         };
-        console.log(`https://api.yelp.com/v3/${type}/${id}`);
-        axios({
+        let business = axios({
             url: `https://api.yelp.com/v3/${type}/${id}`,
             headers: {'Authorization': 'Bearer xkA9Hp5U6wElMNSf3MGcF_L6R0Io18O69Xsth-G-OsV50MIfoVyiWfQmmQgFHpmFvgFatiEW8sppCiAVWrfRgpy1-pNH905xO-Okl1TV6nIqp_RXCSDmvJFOEqKLWnYx'},
             responseType: 'json'
-        }).then(data => {
+        })
+        business.then(data => {
             res.status(200).send(data.data);
         }).catch(err =>
-            res.status(500).send(err)
+            res.status(500).send(
+                {
+                    message: 'There were errors on the server',
+                    error: err
+                }
+            )
         )
     })
 
