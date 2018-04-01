@@ -36,9 +36,9 @@ class Info extends Component{
         let newFormat = new Date(time);
         let dateToRender = newFormat.toDateString();
         let finalDateToRender = dateToRender.substring(0, 10);
+        let minutes = time.substring(13, time.length);
         if (timeParst > 12) {
             let newHour = timeParst - 12;
-            const minutes = time.substring(13, time.length);
             standardTime = `Event Begins at ${newHour}${minutes} PM`;
         }else{
             standardTime = `Event Begins at ${timeParst}${minutes} AM on ${finalDateToRender}`;
