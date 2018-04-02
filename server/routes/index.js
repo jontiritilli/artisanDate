@@ -180,12 +180,7 @@ module.exports = (app,  path) => {
                 }
             )
         }).catch(err =>
-            res.status(500).send(
-                {
-                    message: 'There were errors on the server',
-                    error: err
-                }
-            )
+            res.status(500).send()
         );
     });
     //google places call for food
@@ -239,7 +234,7 @@ module.exports = (app,  path) => {
 
     app.post('/api/getOneBusiness', (req, res) => {
         let {type, id}= req.body;
-        if(id.indexOf('ú')){
+        if(id.indexOf('ú') > -1){
             let position = id.indexOf('ú');
             id = id.split('');
             id.splice(position, 1, 'u');
@@ -253,12 +248,7 @@ module.exports = (app,  path) => {
         business.then(data => {
             res.status(200).send(data.data);
         }).catch(err =>
-            res.status(500).send(
-                {
-                    message: 'There were errors on the server',
-                    error: err
-                }
-            )
+            res.status(500).send()
         )
     })
 
