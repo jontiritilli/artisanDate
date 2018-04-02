@@ -9,16 +9,12 @@ class Info extends Component{
         switch(rating){
             case 4:
                 return <img className = 'responseive-img' src = {fourstar} alt = 'Stars'/>;
-                break;
             case 4.5:
                 return <img className='responseive-img' src={fourhalfstar} alt='Stars' />;
-                break;
             case 5:
                 return <img className='responseive-img' src={fivestar} alt='Stars' />;
-                break;
             default:
                 return <h4>Ratings Not Provided</h4>;
-                break;
         }
     }
     open(is_closed){
@@ -32,45 +28,40 @@ class Info extends Component{
     convertTime(time){
         let standardTime = '';
         let newTime = time.substring(11, time.length);
-        const timeParst = parseInt(newTime);
+        let timeParst = parseInt(newTime);
+        let newFormat = new Date(time);
+        let dateToRender = newFormat.toDateString();
+        let finalDateToRender = dateToRender.substring(0, 10);
+        let minutes = time.substring(13, time.length);
         if (timeParst > 12) {
             let newHour = timeParst - 12;
-            let minutes = time.substring(13, time.length);
-              standardTime = `Event Begins at ${newHour}${minutes} PM`;
+            standardTime = `Event Begins at ${newHour}${minutes} PM`;
         }else{
-            standardTime = `Event Begins at ${timeParst}${minutes} AM`;
+            standardTime = `Event Begins at ${timeParst}${minutes} AM on ${finalDateToRender}`;
         }
-
         return (
-            <span className = 'dollarSign amber-text'>{standardTime}</span>
+            <div className = 'eventTime'>
+                <span>{standardTime}</span>
+                <span>on</span>
+                <span>{finalDateToRender}</span>
+            </div>
         );
     }
     render(){
         const { rating, price, is_closed, display_phone,description, attending_count, time_start } = this.props.business;
-
-
-        
-
-        
-
-        
-        if(this.props.business.business_id){
+        let newFormat = new Date(time_start);
+        let dateToRender = newFormat.toDateString();
+        if(this.props.business.business_id || this.props.business.business_id === null){
             return (
                 <div>
-                    <div id="eventDescription">
-                        <div className='row valign-wrapper center-align'>
-                            <div className='col s12'>
-                                {description}
-                            </div>
+                    <div className = 'descriptionEvent'>
+                        <div className = 'description__text-box'>
+                            <p className = 'description__text'>{description}</p>
                         </div>
-                    </div>
-                    <div className="col s12 center-align" id="rating">
-                        <div className="col">
-                            <span>RSVP: {attending_count}</span>
+                        <div className = 'attendee-box'>
+                            <p>rsvp count: <span className = 'amber-text'>{attending_count}</span></p>
                         </div>
-                        <div className="col">
-                            {this.convertTime(time_start)}
-                        </div>
+                        {this.convertTime(time_start)}
                     </div>
                 </div>
             );
@@ -78,29 +69,16 @@ class Info extends Component{
 
         return (
             <div>
-                <div id = "openOrClosed">
-                    <div className = 'row valign-wrapper center-align'>
-                        <div className = 'col s12'>
-                            {this.open(is_closed)}
-                        </div>
+                <div className='descriptionEvent'>
+                    <div className='description__text-box'>
+                        {this.open(is_closed)}
                     </div>
-                </div>
-                <div className="col s12 center-align" id="rating">
-                            <div className="col">
-                                <span>{this.stars(rating)}</span>
-                            </div>
-                            <div className="col">
-                                <span className = 'dollarSign amber-text'>{price}</span>
-                        </div>
-                </div>
-                <div id="description">
+                    <div className='attendee-box'>
+                        {this.stars(rating)}
+                    </div>
                     <div>
-                        <div className="row valign-wrapper">
-                            <div className="col s12 center-align">
-                                <p className = 'pSize'>For More Information Please Contact:</p>
-                                <span className='pSize'>{<a href = {`tel:${display_phone}`}>{display_phone}</a>}</span>
-                            </div>
-                        </div>
+                        <p>for more information please contact:</p>
+                        <span>{<a href={`tel:${display_phone}`}>{display_phone}</a>}</span>
                     </div>
                 </div>
             </div>
