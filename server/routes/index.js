@@ -180,12 +180,7 @@ module.exports = (app,  path) => {
                 }
             )
         }).catch(err =>
-            res.status(500).send(
-                {
-                    message: 'There were errors on the server',
-                    error: err
-                }
-            )
+            res.status(500).send()
         );
     });
     //google places call for food
@@ -238,19 +233,23 @@ module.exports = (app,  path) => {
     });
 
     app.post('/api/getOneBusiness', (req, res) => {
-        const {type, id}= req.body;
-        axios({
+        let {type, id}= req.body;
+        if(id.indexOf('ú') > -1){
+            let position = id.indexOf('ú');
+            id = id.split('');
+            id.splice(position, 1, 'u');
+            id = id.join('');
+        };
+        let business = axios({
             url: `https://api.yelp.com/v3/${type}/${id}`,
-            // url: `https://api.yelp.com/v3/businesses/four-sons-brewing-huntington-beach-5`,
             headers: {'Authorization': 'Bearer xkA9Hp5U6wElMNSf3MGcF_L6R0Io18O69Xsth-G-OsV50MIfoVyiWfQmmQgFHpmFvgFatiEW8sppCiAVWrfRgpy1-pNH905xO-Okl1TV6nIqp_RXCSDmvJFOEqKLWnYx'},
             responseType: 'json'
         })
-            .then(function(response){
-                res.send(response.data);
-            })
-            .catch(err =>
-                res.status(400).send(err)
-            )
+        business.then(data => {
+            res.status(200).send(data.data);
+        }).catch(err =>
+            res.status(500).send()
+        )
     })
 
 app.get('/getdata', (req, res) => {

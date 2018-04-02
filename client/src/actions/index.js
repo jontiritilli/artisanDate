@@ -13,17 +13,15 @@ export function getPlanner(zip){
         } catch (err) {
             dispatch({
                 type: types.ZIP_ERR,
-                payload: err.response.data
+                payload: err.response
             })
         }
     }
 }
 
 export function getIndividual(id){
-    console.log("get individual action", id);
     return async dispatch => {
         try {
-            console.log("in the try", id);
             const request = await axios.post(`/api/getOneBusiness`, id);
             dispatch({
                 type: types.GET_DETAILS,
@@ -111,9 +109,7 @@ export function locationDetails(props, name) {
 }
 
 export function clearIndividualDetails(){
-    return {
-        type: types.CLEAR_DETAILS
-    }
+    return {type: types.CLEAR_DETAILS}
 }
 
 export function giveNavPath(path){

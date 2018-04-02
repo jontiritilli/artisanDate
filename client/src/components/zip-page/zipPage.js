@@ -3,15 +3,20 @@ import '../../helpers/loadingSpinner.css';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import Modal from "../modal/modal"
 import { getPlanner, loadSpinner, giveNavPath } from '../../actions';
 
 class ZipPage extends Component {
     constructor (props){
         super (props);
+        this.state ={
+            displayModal: false
+        };
 
         this.page = "zip";
 
         this.sendData = this.sendData.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
     componentDidMount(){
         this.props.giveNavPath(this.props.match.path);
@@ -22,15 +27,33 @@ class ZipPage extends Component {
             };
             this.props.loadSpinner(this.page);
             this.props.getPlanner(location.zip).then(() => {
-                sessionStorage.setItem("eventsResults", JSON.stringify(this.props.events));
-                sessionStorage.setItem("foodResults", JSON.stringify(this.props.food));
-                sessionStorage.setItem("drinksResults", JSON.stringify(this.props.drinks));
-                sessionStorage.setItem("loadedResults", JSON.stringify(this.props.dataLoaded));
-                this.props.history.push(`/results-page/${props.zip}`);
+                if (this.props.dataLoaded) {
+                    sessionStorage.setItem("eventsResults", JSON.stringify(this.props.events));
+                    sessionStorage.setItem("foodResults", JSON.stringify(this.props.food));
+                    sessionStorage.setItem("drinksResults", JSON.stringify(this.props.drinks));
+                    sessionStorage.setItem("loadedResults", JSON.stringify(this.props.dataLoaded));
+                    this.props.history.push(`/results-page/${props.zip}/${this.props.events[0].id}/${this.props.food[0].id}/${this.props.drinks[0].id}`);
+                } else {
+                    this.openModal();
+                }
+
             }).catch((error) => {
                 console.log("there was an error connecting to the server", error);
             });
     }
+
+    openModal(){
+        this.setState ({
+            displayModal: true,
+        })
+    }
+
+    closeModal(){
+        this.setState({
+            displayModal: false,
+        })
+    }
+
     renderInput({ input, meta: {touched, error} }){
         const invalidInput = touched && error;
         return (
@@ -71,6 +94,7 @@ class ZipPage extends Component {
                         </div>
                     </div>
                 </div>
+                <Modal display={this.state.displayModal} closeModal={this.closeModal} type="error" message={this.props.errMsg}/>
             </div>
         )
     }
@@ -93,7 +117,8 @@ function mapStateToProps(state){
         food: state.dateResults.food,
         drinks: state.dateResults.drinks,
         dataLoaded: state.dateResults.receivedData,
-        status: state.dateResults.status
+        status: state.dateResults.status,
+        errMsg: state.dateResults.errMsg
     }
 }
 

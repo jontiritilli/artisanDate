@@ -2,7 +2,6 @@ import React from 'react';
 import './title.css';
 
 function TitleImage(props){
-    console.log("titleImage props: ", props);
     const picture = props.business.photos;
     const randomPic = picture ? picture[Math.floor(Math.random() * picture.length)] : null;
     const detailImg = {

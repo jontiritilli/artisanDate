@@ -9,16 +9,12 @@ class Info extends Component{
         switch(rating){
             case 4:
                 return <img className = 'responseive-img' src = {fourstar} alt = 'Stars'/>;
-                break;
             case 4.5:
                 return <img className='responseive-img' src={fourhalfstar} alt='Stars' />;
-                break;
             case 5:
                 return <img className='responseive-img' src={fivestar} alt='Stars' />;
-                break;
             default:
                 return <h4>Ratings Not Provided</h4>;
-                break;
         }
     }
     open(is_closed){
@@ -28,34 +24,61 @@ class Info extends Component{
             return <p className = 'pSize'>CURRENTLY OPEN</p>
         }
     }
+
+    convertTime(time){
+        let standardTime = '';
+        let newTime = time.substring(11, time.length);
+        let timeParst = parseInt(newTime);
+        let newFormat = new Date(time);
+        let dateToRender = newFormat.toDateString();
+        let finalDateToRender = dateToRender.substring(0, 10);
+        let minutes = time.substring(13, time.length);
+        if (timeParst > 12) {
+            let newHour = timeParst - 12;
+            standardTime = `Event Begins at ${newHour}${minutes} PM`;
+        }else{
+            standardTime = `Event Begins at ${timeParst}${minutes} AM on ${finalDateToRender}`;
+        }
+        return (
+            <div className = 'eventTime'>
+                <span>{standardTime}</span>
+                <span>on</span>
+                <span>{finalDateToRender}</span>
+            </div>
+        );
+    }
     render(){
-        const { rating, price, is_closed, display_phone } = this.props.business;
+        const { rating, price, is_closed, display_phone,description, attending_count, time_start } = this.props.business;
+        let newFormat = new Date(time_start);
+        let dateToRender = newFormat.toDateString();
+        if(this.props.business.business_id || this.props.business.business_id === null){
+            return (
+                <div>
+                    <div className = 'descriptionEvent'>
+                        <div className = 'description__text-box'>
+                            <p className = 'description__text'>{description}</p>
+                        </div>
+                        <div className = 'attendee-box'>
+                            <p>rsvp count: <span className = 'amber-text'>{attending_count}</span></p>
+                        </div>
+                        {this.convertTime(time_start)}
+                    </div>
+                </div>
+            );
+        }
 
         return (
             <div>
-                <div id = "openOrClosed">
-                    <div className = 'row valign-wrapper center-align'>
-                        <div className = 'col s12'>
-                            {this.open(is_closed)}
-                        </div>
+                <div className='descriptionEvent'>
+                    <div className='description__text-box'>
+                        {this.open(is_closed)}
                     </div>
-                </div>
-                <div className="col s12 center-align" id="rating">
-                            <div className="col">
-                                <span>{this.stars(rating)}</span>
-                            </div>
-                            <div className="col">
-                                <span className = 'dollarSign amber-text'>{price}</span>
-                        </div>
-                </div>
-                <div id="description">
+                    <div className='attendee-box'>
+                        {this.stars(rating)}
+                    </div>
                     <div>
-                        <div className="row valign-wrapper">
-                            <div className="col s12 center-align">
-                                <p className = 'pSize'>For More Information Please Contact:</p>
-                                <span className='pSize'>{<a href = {`tel:${display_phone}`}>{display_phone}</a>}</span>
-                            </div>
-                        </div>
+                        <p>for more information please contact:</p>
+                        <span>{<a href={`tel:${display_phone}`}>{display_phone}</a>}</span>
                     </div>
                 </div>
             </div>

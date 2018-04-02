@@ -69,7 +69,7 @@ class NavBar extends Component {
 
     handleGoBack(){
         switch (this.props.path) {
-            case "/details-page/:id":
+            case "/details-page/:type/:id":
                 this.props.history.goBack();
                 this.props.clearIndividualDetails();
                 return;
@@ -135,4 +135,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, { signOut, clearIndividualDetails })(NavBar);
+export default connect(mapStateToProps, { signOut, clearIndividualDetails})(NavBar);

@@ -15,9 +15,9 @@ class Summary extends Component{
             displayModal: false,
         };
 
-        this.eventLoc = {lat: null, long: null, address: []};
-        this.foodLoc = {lat: null, long: null, address: []};
-        this.drinkLoc = {lat: null, long: null, address: []};
+        this.eventLoc = {lat: null, long: null, name: null, address: []};
+        this.foodLoc = {lat: null, long: null, name: null, address: []};
+        this.drinkLoc = {lat: null, long: null, name: null, address: []};
 
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -34,6 +34,10 @@ class Summary extends Component{
                 const sessionDateResults = JSON.parse(sessionFinalPlan);
                 this.props.reloadFinalPlan(sessionDateResults);
             }
+        } else if(this.props.auth) {
+            this.props.history.push(`/location-page/`);
+        } else {
+            this.props.history.push(`/`);
         }
     }
 
@@ -69,6 +73,8 @@ class Summary extends Component{
             (1 - c((midpoint2 - long) * p)) / 2;
         return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km;
     }
+
+
 
     determineMapZoom() {
         let zoom = null;
@@ -128,6 +134,7 @@ class Summary extends Component{
         this.eventLoc.address = this.props.event.location.display_address;
         this.foodLoc.address = this.props.food.location.display_address;
         this.drinkLoc.address = this.props.drinks.location.display_address;
+
         return (
                 <div className="grey lighten-4">
                     <div className='row'>
@@ -141,6 +148,9 @@ class Summary extends Component{
                                 eventLoc={this.eventLoc}
                                 foodLoc={this.foodLoc}
                                 drinkLoc={this.drinkLoc}
+                                foodName = {this.props.food.name}
+                                drinkName={this.props.drinks.name}
+                                evtName = {this.props.event.name}
                                 initialLat={latitude}
                                 initialLong={longitude}
                                 mapZoom={initialZoom}
@@ -150,7 +160,7 @@ class Summary extends Component{
 
                     </div>
                         <SummaryButtons openModal={this.openModal}/>
-                        <Modal display={this.state.displayModal} closeModal={this.closeModal} />
+                        <Modal display={this.state.displayModal} closeModal={this.closeModal} type="confirm" message="Are You Sure You Want To Start Over?"/>
                 </div>
         );
     }
