@@ -9,16 +9,12 @@ class Info extends Component{
         switch(rating){
             case 4:
                 return <img className = 'responseive-img' src = {fourstar} alt = 'Stars'/>;
-                break;
             case 4.5:
                 return <img className='responseive-img' src={fourhalfstar} alt='Stars' />;
-                break;
             case 5:
                 return <img className='responseive-img' src={fivestar} alt='Stars' />;
-                break;
             default:
                 return <h4>Ratings Not Provided</h4>;
-                break;
         }
     }
     open(is_closed){
@@ -53,10 +49,9 @@ class Info extends Component{
     }
     render(){
         const { rating, price, is_closed, display_phone,description, attending_count, time_start } = this.props.business;
-        console.log('props in details page:', this.props);
         let newFormat = new Date(time_start);
         let dateToRender = newFormat.toDateString();
-        if(this.props.business.business_id){
+        if(this.props.business.business_id || this.props.business.business_id === null){
             return (
                 <div>
                     <div className = 'descriptionEvent'>

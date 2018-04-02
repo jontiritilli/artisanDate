@@ -31,9 +31,14 @@ class LocationBrowser extends Component {
     }
 
     updateLocation(index, locations){
+
         if(this.props.locations.length === 0){
-            this.locationId = locations[index].id;
-            this.props.locationDetails(locations[index], this.props.name);
+            while (this.props.locName !== locations[this.index].id){
+                this.index++;
+            }
+            this.locationId = locations[this.index].id;
+            this.details = locations[this.index];
+            this.props.locationDetails(this.details, this.props.name);
             return;
         }
         this.index = this.carouselLoaded ? index : this.index;
@@ -45,7 +50,7 @@ class LocationBrowser extends Component {
     }
 
     goToDetails(){
-        if (this.details.business_id){
+        if (this.details.business_id || this.details.business_id === null){
             let type = "events";
             this.props.history.push(`/details-page/${type}/${this.locationId}`);
         } else {
