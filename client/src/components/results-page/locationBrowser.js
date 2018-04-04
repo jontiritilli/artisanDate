@@ -11,12 +11,14 @@ class LocationBrowser extends Component {
     constructor(props){
         super(props);
 
+        this.carouselLoaded = false;
+        this.index = 0;
         this.locationId = "";
         this.details = {};
         this.updateLocation = this.updateLocation.bind(this);
         this.goToDetails = this.goToDetails.bind(this);
     }
-  
+
     componentWillReceiveProps(nextProps){
         if(!this.props.initial.complete){
             this.updateLocation(0, nextProps.locations);
@@ -29,23 +31,36 @@ class LocationBrowser extends Component {
     }
 
     updateLocation(index, locations){
+
         if(this.props.locations.length === 0){
-            this.locationId = locations[index].id;
-            this.props.locationDetails(locations[index], this.props.name);
+            while (this.props.locName !== locations[this.index].id){
+                this.index++;
+            }
+            this.locationId = locations[this.index].id;
+            this.details = locations[this.index];
+            this.props.locationDetails(this.details, this.props.name);
             return;
         }
-        this.locationId = this.props.locations[index].id;
-        this.details = this.props.locations[index];
+        this.index = this.carouselLoaded ? index : this.index;
+        this.carouselLoaded = true;
+        this.locationId = this.props.locations[this.index].id;
+        this.details = this.props.locations[this.index];
         this.props.locationDetails(this.details, this.props.name);
+        this.props.updateUrl(this.locationId, this.props.name);
     }
 
     goToDetails(){
-        this.props.history.push(`/event-page/${this.locationId}`);
+        if (this.details.business_id || this.details.business_id === null){
+            let type = "events";
+            this.props.history.push(`/details-page/${type}/${this.locationId}`);
+        } else {
+            let type = "businesses";
+            this.props.history.push(`/details-page/${type}/${this.locationId}`);
+        }
     }
 
-
     render() {
-        const { locations, name } = this.props;
+        const { locations, name, locName } = this.props;
 
         if(!locations.length){
             return (
@@ -53,7 +68,11 @@ class LocationBrowser extends Component {
                     <div className="col s12 content-list">
                         <div className="card">
                             <div className="card-content center-align">
-                                <div style={{height: "165.39px"}}>Loading...</div>
+                                <div style={{height: "165.39px", position: "relative"}}>
+                                    <div className="loading-center">
+                                        <div className="data-loading"/>
+                                    </div>
+                                </div>
                             </div>
                             <div className="card-action">
                                 <div className="row valign-wrapper bottom-pad">
@@ -66,6 +85,9 @@ class LocationBrowser extends Component {
                     </div>
                 </div>
             );
+        }
+        while (locName !== locations[this.index].id){
+            this.index++;
         }
 
         const result = locations.map((item, index) => {
@@ -83,7 +105,14 @@ class LocationBrowser extends Component {
                             <div className="row">
                                 <div className="col s12">
                                     <span className="card-title my-8">{name}</span>
-                                    <Carousel showThumbs={false} showStatus={false} showArrows={true} infiniteLoop={true} showIndicators={false} swipeScrollTolerance={20} onChange={this.updateLocation}>
+                                    <Carousel showThumbs={false}
+                                              selectedItem={this.index}
+                                              showStatus={false}
+                                              showArrows={true}
+                                              infiniteLoop={true}
+                                              showIndicators={false}
+                                              swipeScrollTolerance={20}
+                                              onChange={this.updateLocation}>
                                         {result}
                                     </Carousel>
                                 </div>

@@ -2,7 +2,8 @@ import "./navBar.css"
 import React, {Component} from "react";
 import{Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { signOut } from '../../actions';
+import { signOut, clearIndividualDetails } from '../../actions';
+import DateLogo from "../../assets/images/DateLogo.svg";
 
 class NavBar extends Component {
     constructor (props){
@@ -24,7 +25,8 @@ class NavBar extends Component {
         this.slideOutMenu = this.slideOutMenu.bind(this);
         this.returnMenu = this.returnMenu.bind(this);
         this.backButton = this.backButton.bind(this);
-        this.handleSignOut = this.handleSignOut.bind(this)
+        this.handleSignOut = this.handleSignOut.bind(this);
+        this.handleGoBack = this.handleGoBack.bind(this);
     }
     slideOutMenu(){
         this.setState({
@@ -56,12 +58,27 @@ class NavBar extends Component {
         switch(this.props.location.pathname){
             case "/":
                 return "";
+            case "/location-page/":
+                return "";
             default:
                 return (
-                    <a className="arrow" style={{cursor: 'pointer'}} onClick={() => { this.props.history.goBack()}}><i className = 'material-icons'>arrow_back</i></a>
+                    <a className="arrow" style={{cursor: 'pointer'}} onClick={this.handleGoBack}><i className = 'material-icons'>arrow_back</i></a>
                 );
         }
     }
+
+    handleGoBack(){
+        switch (this.props.path) {
+            case "/details-page/:type/:id":
+                this.props.history.goBack();
+                this.props.clearIndividualDetails();
+                return;
+            default:
+                return this.props.history.goBack();
+        }
+
+    }
+
     logOutLink(){
         if(this.props.auth){
             return [
@@ -87,7 +104,7 @@ class NavBar extends Component {
                 <nav>
                     <div className="amber nav-wrapper">
                         {this.backButton()}
-                        <a href="#!" className="brand-logo">Artisan Date</a>
+                        <div className="brand-logo"><img src={DateLogo} className="logo-img"/>Artisan Date</div>
                         <a href="#" className="right button-collapse" onClick={this.slideOutMenu}>
                             <i className="material-icons amber-text text-darken-3">menu</i>
                         </a>
@@ -112,10 +129,10 @@ class NavBar extends Component {
 }
 
 function mapStateToProps(state){
-
     return {
-        auth: state.user.auth
+        auth: state.user.auth,
+        path: state.pagePath.path
     }
 }
 
-export default connect(mapStateToProps, { signOut })(NavBar);
+export default connect(mapStateToProps, { signOut, clearIndividualDetails})(NavBar);

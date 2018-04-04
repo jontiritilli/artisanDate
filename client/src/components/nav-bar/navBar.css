@@ -1,3 +1,12 @@
+/******* navBar.css *******/
+nav .brand-logo {
+    font-family: "le-monde-livre-classic-std-s",sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2.5rem;
+    text-align: center;
+    width: 225px;
+}
 .side-nav.right-aligned{
     transition-timing-function: ease-out;
     transition-duration: 0.25s;
@@ -16,6 +25,13 @@
 }
 .drag-target {
     width: 100%;
+}
+.logo-img {
+    height: 36px;
+    width: auto;
+    position: absolute;
+    left: 0;
+    top: 20%;
 }
 
 

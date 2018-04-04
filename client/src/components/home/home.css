@@ -1,23 +1,28 @@
 /******* home.css *******/
 .full-page{
-    height: calc(100vh - 64px);
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 64px);
 }
 .splash-image {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
     background-image: url("../../assets/images/couple.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     filter: blur(3px);
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    z-index: -1;
 }
 .gradient{
-    /*display: flex;*/
-    background: linear-gradient(45deg, rgba(41,147,225,.8), rgba(157,197,246,.6));
+    position: absolute;
     height: 100%;
+    width: 100%;
+    z-index: -1;
+    background: linear-gradient(45deg, rgba(41,147,225,.8), rgba(157,197,246,.6));
 }
 
 .home-btn {
@@ -37,7 +42,23 @@
 .home-btn:focus{
     background-color: #ff8f00;
 }
-.row.centerPage{
+.center-page{
     display: flex;
+    flex-flow: column;
     align-items: center;
+}
+
+
+/*small only*/
+@media screen and (max-width: 600px) {
+    .full-page {
+        min-height: calc(100vh - 56px);
+    }
+}
+
+/*medium and up*/
+@media only screen and (min-width: 601px) {
+    .center-page {
+        padding: 30px;
+    }
 }

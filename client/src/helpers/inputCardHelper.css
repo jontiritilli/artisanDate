@@ -1,4 +1,4 @@
-/**************input helper.css ***************/
+/**************inputCardHelper.css ***************/
 input[type=text]:not(.browser-default)::placeholder,
 input[type=password]:not(.browser-default)::placeholder,
 input[type=email]:not(.browser-default)::placeholder,
@@ -42,8 +42,10 @@ input[type=number].input-validation:not(.browser-default) {
 }
 input[type=text]:not(.browser-default),
 input[type=password]:not(.browser-default),
+input[type=email]:not(.browser-default),
 input[type=number]:not(.browser-default){
     margin-bottom: 7px;
+    font-size: 2rem;
 }
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -52,7 +54,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .input-card-container {
-    height: calc(100vh - 64px);
+    min-height: calc(100vh - 64px);
 }
 
 .error-msg{
@@ -80,14 +82,19 @@ input[type=number]::-webkit-outer-spin-button {
     display: block;
     margin-top: 8px;
 }
-
+/*small only*/
 @media screen and (max-width: 600px) {
+    .input-card-container {
+        min-height: calc(100vh - 56px);
+    }
     .input-field{
         margin-top: 2em;
     }
 }
+/*medium only*/
 @media screen and (min-width: 601px) and (max-width: 992px) {
     .card-width {
+        padding: 20px 0;
         width: 80%;
     }
 
@@ -95,6 +102,7 @@ input[type=number]::-webkit-outer-spin-button {
         margin-top: 4em;
     }
 }
+
 @media screen and (min-width: 993px){
     .card-width {
         width: 70%;
@@ -103,7 +111,7 @@ input[type=number]::-webkit-outer-spin-button {
         margin-top: 4em;
     }
 }
-
+/*x-large and up*/
 @media screen and (min-width: 1230px){
     .card-width {
         width: 55%;

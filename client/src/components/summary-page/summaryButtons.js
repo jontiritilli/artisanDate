@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { Link } from "react-router-dom";
 import { sendMail, loadSpinner } from "../../actions";
 import { connect } from "react-redux";
-import "./summaryPage.css"
-import axios from 'axios';
+import "./summaryPage.css";
+import "../../helpers/loadingSpinner.css";
+
 
 
 class SummaryButtons extends Component {
@@ -13,14 +13,14 @@ class SummaryButtons extends Component {
             email: this.props.email,
             dateData: this.props.dateData,
         };
+        this.page = "email";
 
         this.sendItinerary = this.sendItinerary.bind(this)
     }
     
     sendItinerary(){
-        console.log("User data: ", this.props);
         if (!this.props.sent){
-            this.props.loadSpinner();
+            this.props.loadSpinner(this.page);
             this.props.sendMail(this.data);
         }
     }
@@ -59,7 +59,6 @@ class SummaryButtons extends Component {
 }
 
 function mapStateToProps(state){
-    // console.log("Summary Buttons", state);
     return {
         email: state.user.email,
         dateData: state.datePlan,
@@ -68,11 +67,3 @@ function mapStateToProps(state){
     }
 }
 export default connect(mapStateToProps, {sendMail, loadSpinner})(SummaryButtons);
-
-
-//calendarPage button must route to "calendar page to make a google calendar? How to do this?"
-// Email button must link to email page, how to do this?  need to create the page
-// 2.  Home Button links to Matt's page with zip code I think...
-// 3.  Routes must be on App.js as well as Router
-//App contains the Routes must add them to app.js
-//Need to change NavLink destination once we figure out what all the pages are called

@@ -1,0 +1,29 @@
+/******* summary page print styles *******/
+
+@media print {
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+    .btn {
+        display: none;
+    }
+    button {
+        display: none;
+    }
+    .gm-style div > img {
+        position: absolute;
+	}
+    .navbar-fixed {
+        display: none;
+    }
+    .row .col.nav-contain {
+        margin-top: 3%;
+        width: 100%;
+        height: 710px;
+    }
+    .row .col.marker {
+        padding-top: 1.5%;
+    }
+}
+

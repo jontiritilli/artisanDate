@@ -2,9 +2,7 @@ import axios from "axios";
 import { browserHistory } from 'react-router';
 import types from './types';
 
-
 export function getPlanner(zip){
-    // console.log("The ZIP:", zip);
     return async dispatch => {
         try {
             const request = await axios.post(`/api/getEverything`, zip);
@@ -13,7 +11,10 @@ export function getPlanner(zip){
                 payload: request
             })
         } catch (err) {
-            console.log(err)
+            dispatch({
+                type: types.ZIP_ERR,
+                payload: err.response
+            })
         }
     }
 }
@@ -97,16 +98,46 @@ export function sendMail(data) {
     }
 }
 
+
+
 /**********************NON AXIOS****************************/
 export function locationDetails(props, name) {
-    return{
+    return {
         type: name,
         payload: props
     }
 }
 
-export function loadSpinner(){
-    return{
-        type: "sending"
+export function clearIndividualDetails(){
+    return {type: types.CLEAR_DETAILS}
+}
+
+export function giveNavPath(path){
+    return {
+        type: types.GET_PATH,
+        payload: path
+    }
+}
+
+export function reloadPlanner(props){
+    return {
+        type: types.RELOAD_PLANNER,
+        payload: props
+    }
+}
+
+export function reloadFinalPlan(props){
+    return {
+        type: types.RELOAD_FINAL_PLAN,
+        payload: props
+    }
+}
+
+export function loadSpinner(pageName){
+    switch (pageName){
+        case "zip":
+            return {type: types.ZIP_SENDING};
+        case "email":
+            return {type: types.EMAIL_SENDING};
     }
 }

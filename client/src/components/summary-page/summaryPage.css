@@ -6,6 +6,12 @@ html{
 div>i.nav-icon-size{
     font-size: 5.6rem;
 }
+.address-line{
+    margin: 0;
+}
+.btn-confirm{
+    width: 80%;
+}
 .event-contain{
     border-bottom: 1px solid #64b5f6;
     height: 3vh;
@@ -26,67 +32,20 @@ div.s2.event-contain{
     padding: 0;
     border-radius: 0 0 2px 2px;
 }
-.btn-confirm{
-    width: 80%;
-}
-.map-container {
-    height: 100%;
-}
-.nav-contain {
-    height: calc(100vh - 318px);
-}
-.route-container {
-    padding: 5px;
-}
-.address-line{
-    margin: 0;
-}
-
-.homeModal {
-    display: none;
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    z-index: 50;
-    overflow: hidden;
-    left:0;
-    top: 0;
-    background-color: rgba(0,0,0,0.6)
-}
-
-.modalConfirmation {
-    color: white;
-    font-size: 2rem;
-    margin-top: 10%;
-    margin-bottom: 10%;
-}
-
-.modal-font {
-    font-size: 1.5rem;
-}
 .legend-img {
     width: 38px;
     height: 38px;
 }
-
-/*SPINNER taken from Alan Shortis via code pen*/
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+.map-container {
+    height: 100%;
 }
-.loading {
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    border: .25rem solid rgba(255, 255, 255, 0.2);
-    border-top-color: #fff;
-    animation: spin 750ms infinite linear;
+.row .col.nav-contain {
+    height: calc(100vh - 318px);
+    min-height: 349px;
 }
-
+.route-container {
+    padding: 5px;
+}
 /******* Media breakpoints *******/
 /*medium and up*/
 @media only screen and (min-width: 601px) {

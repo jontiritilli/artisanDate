@@ -8,11 +8,10 @@ const DEFAULT_STATE = {
 export default function (state = DEFAULT_STATE, action) {
     switch (action.type) {
         case types.SEND_MAIL:
-            console.log("REDUCER", action.payload);
             const {sent} = action.payload.data;
             const status = sent ? "sent" : "idle";
             return {...state, emailSent: sent, status: status};
-        case "sending":
+        case types.EMAIL_SENDING:
             return {...state, status: "sending"};
         default:
             return state;

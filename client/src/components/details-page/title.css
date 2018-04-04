@@ -1,0 +1,25 @@
+/******* title.css *******/
+#title{
+    height: 9vh;
+}
+
+#title h1{
+    margin: 2vh auto;
+    box-sizing: border-box;
+    font-size: 4rem;
+}
+.incoming{
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media screen and (min-width: 993px){
+    .responsive-img{
+        height: 35vh !important;
+    }
+
+    #title {
+        height: 5vh;
+    }
+}

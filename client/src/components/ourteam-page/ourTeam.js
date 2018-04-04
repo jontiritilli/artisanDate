@@ -154,11 +154,11 @@ export default class OurTeam extends Component {
                                                             <h3><LinkedIn /></h3>
                                                         </a>
                                                     </div>
-                                                    {/* <div className="col s4">
-                                                        <a href="" target='_blank' rel="noopener noreferrer">
+                                                     <div className="col s4">
+                                                        <a href="https://a-a-ron.tech/" target='_blank' rel="noopener noreferrer">
                                                             <h3><User /></h3>
                                                         </a>
-                                                    </div> */}
+                                                    </div>
                                                 </div>
                                                 <div className="divider"></div>
                                                 <div className="row center-align">
