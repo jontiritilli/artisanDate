@@ -38,6 +38,7 @@ class LocationBrowser extends Component {
             this.locationId = locations[this.index].id;
             this.details = locations[this.index];
             this.props.locationDetails(this.details, this.props.name);
+            this.carouselLoaded = true;
             return;
         }
         this.index = this.carouselLoaded ? index : this.index;
