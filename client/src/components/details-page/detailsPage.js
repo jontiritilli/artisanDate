@@ -5,7 +5,7 @@ import { getIndividual, giveNavPath } from '../../actions';
 import TitleImage from './title';
 import Info from './info';
 
-
+//http://localhost:3000/details-page/businesses/yXNZiSDhU47hWfCreKHATw
 class DetailsPage extends Component{
 
     componentDidMount(){
@@ -13,6 +13,7 @@ class DetailsPage extends Component{
         this.props.giveNavPath(this.props.match.path);
     }
     render(){
+        console.log('props in details page:', this.props);
         if (Object.keys(this.props.details).length === 0){
             return(
                 <div className='incoming'>

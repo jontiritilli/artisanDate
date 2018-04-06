@@ -93,6 +93,7 @@ class ResultsPage extends Component {
     }
 
     render() {
+        console.log('props in results page:', this.props);
         const { history } = this.props;
 
         return (
@@ -105,6 +106,7 @@ class ResultsPage extends Component {
                                      locName={this.props.match.params.events}
                                      updateUrl={this.updateUrl}
                     />
+                    <Link to={this.props.mainEvent.business_id ? `/details-page/events/${this.props.mainEvent.id}` : `/details-page/businesses/${this.props.mainEvent.id}`} className='btn thin-btn cyan'>Details</Link>
                     <LocationBrowser initial={this.initialUpdate}
                                      name="Food"
                                      history={history}
@@ -112,6 +114,7 @@ class ResultsPage extends Component {
                                      locName={this.props.match.params.food}
                                      updateUrl={this.updateUrl}
                     />
+                    <Link to={`/details-page/businesses/${this.props.mainFood.id}`} className='btn thin-btn cyan'>Details</Link>
                     <LocationBrowser initial={this.initialUpdate}
                                      name="Drinks"
                                      history={history}
@@ -119,6 +122,7 @@ class ResultsPage extends Component {
                                      locName={this.props.match.params.drinks}
                                      updateUrl={this.updateUrl}
                     />
+                    <Link to={`/details-page/businesses/${this.props.mainDrinks.id}`} className='btn thin-btn cyan'>Details</Link>
                     <div className="center-align">
                         <button onClick={this.goToSummary.bind(this)} className='btn cyan my-8'>Next</button>
                     </div>
