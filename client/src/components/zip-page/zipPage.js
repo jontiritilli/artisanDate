@@ -1,17 +1,19 @@
 import '../../helpers/inputCardHelper.css';
 import '../../helpers/loadingSpinner.css';
+import './zipPage.css';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import LocationArrow from 'react-icons/lib/fa/location-arrow';
 import Modal from "../modal/modal";
-import Geolocation from "../geolocation/geolocation";
 import { getPlanner, loadSpinner, giveNavPath } from '../../actions';
 
 class ZipPage extends Component {
     constructor (props){
         super (props);
         this.state ={
-            displayModal: false
+            displayModal: false,
+            geoZip: "",
         };
 
         this.page = "zip";
@@ -84,6 +86,7 @@ class ZipPage extends Component {
     updatePosition(position){
         console.log("lat", position.coords.latitude);
         console.log("long", position.coords.longitude);
+        const response = position.coords.latitude;
     }
     returnGeoError(err){
         console.log(err)
@@ -111,10 +114,10 @@ class ZipPage extends Component {
                         <div className="card white ">
                             <div className="card-content">
                                 <div className="grey-text text-darken-3 center-align card-subtitle">
-                                    Let us know your date location to get started.
+                                    <div>Let us know your date location to get started.</div>
+                                    <button className="location-btn" onClick={this.getLocation}><LocationArrow/> Use Current Location</button>
                                 </div>
-                                {/*<Geolocation />*/}
-                                <button onClick={this.getLocation}>get location</button>
+
                                 <form onSubmit={this.props.handleSubmit(this.sendData)} className="center-align">
                                     <Field label='zip' name='zip' component={this.renderInput}/>
                                     {goButton}
