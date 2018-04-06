@@ -5,13 +5,13 @@
   "main": "index.js",
   "proxy": {
     "/auth/*": {
-      "target": "https://localhost:8000"
+      "target": "http://localhost:8000"
     },
     "/api/*": {
-      "target": "https://localhost:8000"
+      "target": "http://localhost:8000"
     },
     "/mailer/*": {
-      "target": "https://localhost:8000"
+      "target": "http://localhost:8000"
     }
   },
   "scripts": {
