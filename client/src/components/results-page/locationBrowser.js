@@ -31,7 +31,6 @@ class LocationBrowser extends Component {
     }
 
     updateLocation(index, locations){
-
         if(this.props.locations.length === 0){
             while (this.props.locName !== locations[this.index].id){
                 this.index++;
@@ -47,6 +46,7 @@ class LocationBrowser extends Component {
         this.details = this.props.locations[this.index];
         this.props.locationDetails(this.details, this.props.name);
         this.props.updateUrl(this.locationId, this.props.name);
+        
     }
 
     goToDetails(){

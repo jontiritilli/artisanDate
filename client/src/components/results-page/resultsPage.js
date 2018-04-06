@@ -93,7 +93,7 @@ class ResultsPage extends Component {
     }
 
     render() {
-        console.log('props in results page:', this.props);
+        console.log('props in results are:', this.props);
         const { history } = this.props;
 
         return (
