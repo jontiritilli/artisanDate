@@ -21,7 +21,6 @@ class ZipPage extends Component {
 
         this.sendData = this.sendData.bind(this);
         this.closeModal = this.closeModal.bind(this);
-        this.getInnerRef = this.getInnerRef.bind(this);
         this.getLocation = this.getLocation.bind(this);
     }
     componentDidMount(){
@@ -69,14 +68,7 @@ class ZipPage extends Component {
             </div>
         )
     }
-    innerRef;
-    getInnerRef(ref) {
-        this.innerRef = ref;
-    }
 
-    // getLocation() {
-    //     this.innerRef && this.innerRef.getLocation();
-    // }
     getLocation() {
         // let status
         console.log("clicked");
@@ -86,14 +78,14 @@ class ZipPage extends Component {
     updatePosition(position){
         console.log("lat", position.coords.latitude);
         console.log("long", position.coords.longitude);
-        const response = position.coords.latitude;
+        // const response = position.coords.latitude;
+        // `https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyBAluNpWLyHEqQ8d28jmDMPsQLdtYVPV1A`
     }
     returnGeoError(err){
         console.log(err)
     }
 
     render(){
-        console.log("this.innerRef", this.innerRef);
         const {status} = this.props;
         let goButton;
         switch(status){
@@ -117,7 +109,6 @@ class ZipPage extends Component {
                                     <div>Let us know your date location to get started.</div>
                                     <button className="location-btn" onClick={this.getLocation}><LocationArrow/> Use Current Location</button>
                                 </div>
-
                                 <form onSubmit={this.props.handleSubmit(this.sendData)} className="center-align">
                                     <Field label='zip' name='zip' component={this.renderInput}/>
                                     {goButton}
