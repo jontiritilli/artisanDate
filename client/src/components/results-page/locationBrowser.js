@@ -99,34 +99,19 @@ class LocationBrowser extends Component {
         });
 
         return (
-            <div className="row valign-wrapper">
-                <div className="col s12 content-list">
-                    <div className="card">
-                        <div className="card-content no-pad">
-                            <div className="row">
-                                <div className="col s12">
-                                    <span className="card-title my-8">{name}</span>
-                                    <Carousel showThumbs={false}
-                                              selectedItem={this.index}
-                                              showStatus={false}
-                                              showArrows={true}
-                                              infiniteLoop={true}
-                                              showIndicators={false}
-                                              swipeScrollTolerance={20}
-                                              onChange={this.updateLocation}>
-                                        {result}
-                                    </Carousel>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card-action">
-                            <div className="row valign-wrapper bottom-pad">
-                                <div className="col s3 offset-s7 center-align">
-                                    <button onClick={this.goToDetails} className='btn thin-btn cyan'>Details</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div className="row">
+                <div className="col s12">
+                    <span className="card-title my-8">{name}</span>
+                    <Carousel showThumbs={false}
+                        selectedItem={this.index}
+                        showStatus={false}
+                        showArrows={true}
+                        infiniteLoop={true}
+                        showIndicators={false}
+                        swipeScrollTolerance={20}
+                        onChange={this.updateLocation}>
+                        {result}
+                    </Carousel>
                 </div>
             </div>
         );

@@ -98,30 +98,72 @@ class ResultsPage extends Component {
         return (
             <div className="grey lighten-4">
                 <div className="active-area">
-                    <LocationBrowser initial={this.initialUpdate}
-                                     name="Events"
-                                     history={history}
-                                     locations={this.props.events}
-                                     locName={this.props.match.params.events}
-                                     updateUrl={this.updateUrl}
-                    />
-                    <Link to={this.props.mainEvent.business_id ? `/details-page/events/${this.props.mainEvent.id}` : `/details-page/businesses/${this.props.mainEvent.id}`} className='btn thin-btn cyan'>Details</Link>
-                    <LocationBrowser initial={this.initialUpdate}
-                                     name="Food"
-                                     history={history}
-                                     locations={this.props.food}
-                                     locName={this.props.match.params.food}
-                                     updateUrl={this.updateUrl}
-                    />
-                    <Link to={`/details-page/businesses/${this.props.mainFood.id}`} className='btn thin-btn cyan'>Details</Link>
-                    <LocationBrowser initial={this.initialUpdate}
-                                     name="Drinks"
-                                     history={history}
-                                     locations={this.props.drinks}
-                                     locName={this.props.match.params.drinks}
-                                     updateUrl={this.updateUrl}
-                    />
-                    <Link to={`/details-page/businesses/${this.props.mainDrinks.id}`} className='btn thin-btn cyan'>Details</Link>
+                    <div className="row valign-wrapper">
+                        <div className="col s12 content-list">
+                            <div className="card">
+                                <div className="card-content no-pad">
+                                    <LocationBrowser initial={this.initialUpdate}
+                                        name="Events"
+                                        history={history}
+                                        locations={this.props.events}
+                                        locName={this.props.match.params.events}
+                                        updateUrl={this.updateUrl}
+                                    />
+                                </div>
+                                <div className="card-action">
+                                    <div className="row valign-wrapper bottom-pad">
+                                        <div className="col s3 offset-s7 center-align">
+                                            <Link to={this.props.mainEvent.business_id ? `/details-page/events/${this.props.mainEvent.id}` : `/details-page/businesses/${this.props.mainEvent.id}`} className='btn thin-btn cyan'>Details</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row valign-wrapper">
+                        <div className="col s12 content-list">
+                            <div className="card">
+                                <div className="card-content no-pad">
+                                    <LocationBrowser initial={this.initialUpdate}
+                                        name="Food"
+                                        history={history}
+                                        locations={this.props.food}
+                                        locName={this.props.match.params.food}
+                                        updateUrl={this.updateUrl}
+                                    />
+                                </div>
+                                <div className="card-action">
+                                    <div className="row valign-wrapper bottom-pad">
+                                        <div className="col s3 offset-s7 center-align">
+                                            <Link to={`/details-page/businesses/${this.props.mainFood.id}`} className='btn thin-btn cyan'>Details</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row valign-wrapper">
+                        <div className="col s12 content-list">
+                            <div className="card">
+                                <div className="card-content no-pad">
+                                    <LocationBrowser initial={this.initialUpdate}
+                                        name="Drinks"
+                                        history={history}
+                                        locations={this.props.drinks}
+                                        locName={this.props.match.params.drinks}
+                                        updateUrl={this.updateUrl}
+                                    />
+                                </div>
+                                <div className="card-action">
+                                    <div className="row valign-wrapper bottom-pad">
+                                        <div className="col s3 offset-s7 center-align">
+                                            <Link to={`/details-page/businesses/${this.props.mainDrinks.id}`} className='btn thin-btn cyan'>Details</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div className="center-align">
                         <button onClick={this.goToSummary.bind(this)} className='btn cyan my-8'>Next</button>
                     </div>
