@@ -113,7 +113,7 @@ class ResultsPage extends Component {
                                 <div className="card-action">
                                     <div className="row valign-wrapper bottom-pad">
                                         <div className="col s3 offset-s7 center-align">
-                                            <Link to={this.props.mainEvent.business_id ? `/details-page/events/${this.props.mainEvent.id}` : `/details-page/businesses/${this.props.mainEvent.id}`} className='btn thin-btn cyan'>Details</Link>
+                                            <Link to={this.props.mainEvent.business_id || this.props.mainEvent.business_id === null ? `/details-page/events/${this.props.mainEvent.id}` : `/details-page/businesses/${this.props.mainEvent.id}`} className='btn thin-btn cyan'>Details</Link>
                                         </div>
                                     </div>
                                 </div>
