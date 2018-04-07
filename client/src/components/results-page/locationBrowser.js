@@ -31,7 +31,6 @@ class LocationBrowser extends Component {
     }
 
     updateLocation(index, locations){
-
         if(this.props.locations.length === 0){
             while (this.props.locName !== locations[this.index].id){
                 this.index++;
@@ -39,6 +38,7 @@ class LocationBrowser extends Component {
             this.locationId = locations[this.index].id;
             this.details = locations[this.index];
             this.props.locationDetails(this.details, this.props.name);
+            this.carouselLoaded = true;
             return;
         }
         this.index = this.carouselLoaded ? index : this.index;
@@ -47,6 +47,7 @@ class LocationBrowser extends Component {
         this.details = this.props.locations[this.index];
         this.props.locationDetails(this.details, this.props.name);
         this.props.updateUrl(this.locationId, this.props.name);
+        
     }
 
     goToDetails(){
@@ -98,34 +99,19 @@ class LocationBrowser extends Component {
         });
 
         return (
-            <div className="row valign-wrapper">
-                <div className="col s12 content-list">
-                    <div className="card">
-                        <div className="card-content no-pad">
-                            <div className="row">
-                                <div className="col s12">
-                                    <span className="card-title my-8">{name}</span>
-                                    <Carousel showThumbs={false}
-                                              selectedItem={this.index}
-                                              showStatus={false}
-                                              showArrows={true}
-                                              infiniteLoop={true}
-                                              showIndicators={false}
-                                              swipeScrollTolerance={20}
-                                              onChange={this.updateLocation}>
-                                        {result}
-                                    </Carousel>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card-action">
-                            <div className="row valign-wrapper bottom-pad">
-                                <div className="col s3 offset-s7 center-align">
-                                    <button onClick={this.goToDetails} className='btn thin-btn cyan'>Details</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div className="row">
+                <div className="col s12">
+                    <span className="card-title my-8">{name}</span>
+                    <Carousel showThumbs={false}
+                        selectedItem={this.index}
+                        showStatus={false}
+                        showArrows={true}
+                        infiniteLoop={true}
+                        showIndicators={false}
+                        swipeScrollTolerance={20}
+                        onChange={this.updateLocation}>
+                        {result}
+                    </Carousel>
                 </div>
             </div>
         );

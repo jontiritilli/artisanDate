@@ -129,9 +129,9 @@ export default class OurTeam extends Component {
                                                         </a>
                                                     </div>
                                                     <div className="col s4">
-                                                        {/* <a href="" target='_blank' rel="noopener noreferrer">
+                                                        <a href="https://www.linkedin.com/in/marcos-gonzalez-86773215a/" target='_blank' rel="noopener noreferrer">
                                                             <h3><LinkedIn /></h3>
-                                                        </a> */}
+                                                        </a> 
                                                     </div>
                                                     <div className="col s4">
                                                         <a href="http://mgonzalez.io" target='_blank' rel="noopener noreferrer">

@@ -5,7 +5,6 @@ import { getIndividual, giveNavPath } from '../../actions';
 import TitleImage from './title';
 import Info from './info';
 
-
 class DetailsPage extends Component{
 
     componentDidMount(){
