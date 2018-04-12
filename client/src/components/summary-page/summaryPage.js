@@ -123,7 +123,6 @@ class Summary extends Component{
     }
 
     render() {
-        console.log("props are: ", this.props);
         if (Object.keys(this.props.event).length === 0 || Object.keys(this.props.food).length === 0 || Object.keys(this.props.drinks).length === 0) {
             return(
                 <div className="grey lighten-4"/>

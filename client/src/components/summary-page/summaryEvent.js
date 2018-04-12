@@ -6,7 +6,6 @@ import drinks from '../../assets/images/drinks_legend.png';
 
 
 const SummaryEvent = props => {
-    console.log("props in summaryEvent: ", props);
     const icons = [event, food, drinks];
     let markerSelect = <div/>;
         switch(props.eventType){
