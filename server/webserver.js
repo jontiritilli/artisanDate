@@ -7,7 +7,7 @@ const passport = require('passport');
 const { secret } = require('./config/credentials');
 
 const app = express();
-const PORT = process.env.PORT || 8001;
+const PORT = process.env.PORT || 8000;
 
 //middleware
 app.use(cors());

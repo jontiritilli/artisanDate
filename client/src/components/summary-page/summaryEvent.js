@@ -6,6 +6,7 @@ import drinks from '../../assets/images/drinks_legend.png';
 
 
 const SummaryEvent = props => {
+    console.log("props in summaryEvent: ", props);
     const icons = [event, food, drinks];
     let markerSelect = <div/>;
         switch(props.eventType){
@@ -33,7 +34,8 @@ const SummaryEvent = props => {
                                     <div className="col s12">{props.eventType}</div>
                                 </div>
                                 <div className="row">
-                                    <div className="col s11 offset-s1 event-font truncate">{props.eventName}</div>
+                                    <div className="col s6 offset-s1 event-font truncate">{props.eventName}</div>
+                                    <div className = "col s5 event-font no-show">{props.location[0]}</div>
                                 </div>
                             </div>
                             {markerSelect}
