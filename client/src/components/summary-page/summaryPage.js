@@ -139,9 +139,9 @@ class Summary extends Component{
                 <div className="grey lighten-4">
                     <div className='row'>
                         <div className="col s12 m10 offset-m1 l6 offset-l3">
-                                    <SummaryEvent eventType="Event" eventName={this.props.event.name}/>
-                                    <SummaryEvent eventType="Food" eventName={this.props.food.name}/>
-                                    <SummaryEvent eventType="Drinks" eventName={this.props.drinks.name}/>
+                            <SummaryEvent eventType="Event" eventName={this.props.event.name} location = {this.props.event.location.display_address}/>
+                            <SummaryEvent eventType="Food" eventName={this.props.food.name} location={this.props.food.location.display_address}/>
+                            <SummaryEvent eventType="Drinks" eventName={this.props.drinks.name} location={this.props.drinks.location.display_address}/>
                         </div>
                         <div className="col s12 m10 offset-m1 l6 offset-l3 nav-contain">
                             <MapComponent

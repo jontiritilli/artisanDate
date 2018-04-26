@@ -25,5 +25,9 @@
     .row .col.marker {
         padding-top: 1.5%;
     }
+
+    .no-show{
+        display: block;
+    }
 }
 

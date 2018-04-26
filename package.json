@@ -22,5 +22,8 @@
   "homepage": "https://github.com/Learning-Fuze/c12.17_datenight#readme",
   "devDependencies": {
     "concurrently": "^3.5.1"
+  },
+  "dependencies": {
+    "npm": "^5.8.0"
   }
 }
